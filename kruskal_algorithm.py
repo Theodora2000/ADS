@@ -63,15 +63,21 @@ for line in Lines:
     list_of_integers = list(map(int, list_of_strings))
     graph_matrix.append(list_of_integers)
 
+
 graph = {}
 
-for i in range(len(graph_matrix)):
-    for j in range(len(graph_matrix[i])):
-        if graph_matrix[i][j] != 0:
-            if i not in graph:
-                graph[i] = {}
-            graph[i][j] = graph_matrix[i][j]
+# Convert the matrix to a dictionary format
+for edge in graph_matrix:
+    vertex1, vertex2, weight = edge
+    if vertex1 not in graph:
+        graph[vertex1] = {}
+    if vertex2 not in graph:
+        graph[vertex2] = {}
+    graph[vertex1][vertex2] = weight
+    graph[vertex2][vertex1] = weight
 
+# Find the minimum spanning tree using the kruskal function
 minimum_spanning_tree = kruskal(graph)
 
+# Print the minimum spanning tree
 print(minimum_spanning_tree)
